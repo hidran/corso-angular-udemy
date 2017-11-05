@@ -1,4 +1,3 @@
-`
 <table>
     <caption>{{title}}</caption>
     <tr>
@@ -9,8 +8,11 @@
         <th>Telefono</th>
         <th>Provincia</th>
         <th>Age</th>
+        <th>Actions</th>
     </tr>
-  <tr app-user *ngFor ="let user of users" [user-data] = "user">
+  <tr app-user="user" *ngFor ="let user of users" [user-data] = "user"
+      (onDeleteUser) = "onDeleteUser($event)"  (onSelectUser) = "onSelectUser($event)"
+  >
     
   </tr>
 </table>
