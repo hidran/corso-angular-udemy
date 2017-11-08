@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {User} from '../classes/user';
 import {UserService} from '../services/user.service';
 import {FormsModule} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -20,9 +21,18 @@ export class UserDetailComponent implements OnInit {
      return this.__user;
  }
 
-    constructor(private userService: UserService) {}
+    constructor(private userService: UserService, private route: ActivatedRoute) {
+    }
 
-    ngOnInit() {}
+    ngOnInit() {
+      this.user = new User();
+      
+        this.route.params.subscribe(
+            (params) => {
+                this.user = this.userService.getUser(+params.id);
+            }
+        );
+    }
     saveUser() {
         if (this.user.id > 0) {
             this.userService.updateUser(this.user);

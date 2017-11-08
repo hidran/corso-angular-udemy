@@ -49,8 +49,11 @@ export class UserService {
     constructor() {
     }
 
-    getUsers() {
+       getUsers() {
         return this.users;
+    }
+    getUser(id: number): User {
+        return this.users[id];
     }
 
     deleteUser(user) {
