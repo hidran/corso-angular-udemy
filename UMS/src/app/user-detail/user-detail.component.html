@@ -29,7 +29,8 @@
         <label   for="province">Province</label>
         <input  [(ngModel)]="user.province"  class="form-control" type="text" name="province" id="province">
     </div>
-  <div class="form-group form-footer">
+  <div class="form-group form-footer text-center">
+      <button (click)="backToUsers()" class="btn btn-primary">BACK</button>
       <button class="btn btn-secondary" (click)="resetForm(f.form)">RESET</button>
       <button class="btn btn-success" (click)="saveUser()"> SAVE</button>
   </div>

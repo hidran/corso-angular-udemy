@@ -53,7 +53,7 @@ export class UserService {
         return this.users;
     }
     getUser(id: number): User {
-        return this.users[id];
+        return this.users.find( user => user.id === id);
     }
 
     deleteUser(user) {
@@ -64,14 +64,14 @@ export class UserService {
     }
     updateUser(user: UserInterface) {
         const idx = this.users.findIndex((v) => v.id === user.id);
-        alert(idx);
+      
         if (idx !== -1) {
             this.users[idx] = user;
         }
     }
     createUser(user: UserInterface) {
-       
-            this.users.splice(0,0,user);
-        
+      
+            this.users.splice(0, 0, user);
+           
     }
 }

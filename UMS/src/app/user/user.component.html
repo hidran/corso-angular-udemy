@@ -6,17 +6,23 @@
 
 <td class="buttons">
     <div class="row">
-        <div class="col-sm-6">
-            <button class="btn btn-primary btn-sm" (click)="updateUser()">
-                <fa name="pencil"></fa>
+        
+        <div class="col-sm-3">
+            <button class="btn btn-primary" (click)="showUserDetaill()">
+                <fa name="info" fixed="true" ></fa>
             </button>
         </div>
-        <div class="col-sm-6"> 
-            <button class="btn btn-danger  btn-sm" (click)="deleteUser()">
-                <fa name="trash-o"></fa>
+        <div class="col-sm-3">
+            <button class="btn btn-primary" (click)="updateUser()">
+                <fa name="pencil" fixed="true" ></fa>
             </button>
         </div>
-  
+        <div class="col-sm-3"> 
+            <button class="btn btn-danger" (click)="deleteUser()">
+                <fa name="trash"  fixed="true" ></fa>
+            </button>
+        </div>
+       
    
     </div>
 </td>

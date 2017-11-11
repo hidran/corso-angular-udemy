@@ -1,0 +1,115 @@
+Index: src/app/user-data/user-data.component.ts
+===================================================================
+--- src/app/user-data/user-data.component.ts	(date 0)
++++ src/app/user-data/user-data.component.ts	(date 0)
+@@ -1,34 +0,0 @@
+-import { Component, OnInit } from '@angular/core';
+-import {ActivatedRoute, Router} from '@angular/router';
+-import {User} from '../classes/User';
+-import {UserService} from '../services/user.service';
+-
+-@Component({
+-  selector: 'app-user-data',
+-  templateUrl: './user-data.component.html',
+-  styleUrls: ['./user-data.component.css']
+-})
+-export class UserDataComponent implements OnInit {
+-  public User$;
+-  public title = 'User Detail'
+-  constructor( private route: ActivatedRoute,
+-               private userService: UserService,
+-               private router: Router
+-  ) {
+-    
+-  }
+-
+-  ngOnInit() {
+-     
+-     this.route.params.subscribe(
+-         (p) => {
+-           this.User$ =   this.userService.getUser(+p.id)
+-          
+-             //this.User = this.userService.getUser(+p.id);
+-         }
+-     );
+-  }
+-    backToUsers() {
+-      this.router.navigate(['users']);
+-    }
+-}
+Index: src/app/user-data/user-data.component.css
+===================================================================
+--- src/app/user-data/user-data.component.css	(date 0)
++++ src/app/user-data/user-data.component.css	(date 0)
+@@ -1,0 +0,0 @@
+Index: src/app/user-data/user-data.component.spec.ts
+===================================================================
+--- src/app/user-data/user-data.component.spec.ts	(date 0)
++++ src/app/user-data/user-data.component.spec.ts	(date 0)
+@@ -1,25 +0,0 @@
+-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+-
+-import { UserDataComponent } from './user-data.component';
+-
+-describe('UserDataComponent', () => {
+-  let component: UserDataComponent;
+-  let fixture: ComponentFixture<UserDataComponent>;
+-
+-  beforeEach(async(() => {
+-    TestBed.configureTestingModule({
+-      declarations: [ UserDataComponent ]
+-    })
+-    .compileComponents();
+-  }));
+-
+-  beforeEach(() => {
+-    fixture = TestBed.createComponent(UserDataComponent);
+-    component = fixture.componentInstance;
+-    fixture.detectChanges();
+-  });
+-
+-  it('should create', () => {
+-    expect(component).toBeTruthy();
+-  });
+-});
+Index: src/app/user-data/user-data.component.html
+===================================================================
+--- src/app/user-data/user-data.component.html	(date 0)
++++ src/app/user-data/user-data.component.html	(date 0)
+@@ -1,35 +0,0 @@
+-<h2>{{title}}</h2>
+-<table class="table table-dark"  *ngIf="User$ | async; let User; else loading">
+-    <tr>
+-        <th>Name</th>
+-        <td>{{User.name}}</td>
+-    </tr>
+-    <tr>
+-        <th>Lastname</th>
+-        <td>{{User.lastname}}</td>
+-    </tr>
+-    <tr>
+-        <th>Fiscalcode</th>
+-        <td>{{User.fiscalcode}}</td>
+-    </tr>
+-    <tr>
+-        <th>Email</th>
+-        <td>{{User.email}}</td>
+-    </tr>
+-    <tr>
+-        <th>Phone</th>
+-        <td>{{User.phone}}</td>
+-    </tr>
+-    <tr>
+-        <th>Age</th>
+-        <td>{{User.age}}</td>
+-    </tr>
+-    <tr>
+-        <th>Province</th>
+-        <td>{{User.province}}</td>
+-    </tr>
+-    <tfoot>
+-    <tr> <td colspan="2" class="text-center"><button (click)="backToUsers()" class="btn btn-primary">BACK</button></td> </tr>
+-    </tfoot>
+-</table> 
+-<ng-template #loading> loading</ng-template>
+\ No newline at end of file
