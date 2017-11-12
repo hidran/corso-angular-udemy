@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {User} from '../classes/user';
+import {User} from '../classes/User';
 import {UserService} from '../services/user.service';
 import {FormsModule} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -15,7 +15,7 @@ export class UserDetailComponent implements OnInit {
     private __user: User;
  @Input() set user(user: User){
        this.__user = user;
-       this.userCopy = Object.assign({}, user);
+      
  }
  get user() {
      return this.__user;
@@ -35,7 +35,9 @@ export class UserDetailComponent implements OnInit {
                if (!params.id) {
                    return;
                }
-                this.user = this.userService.getUser(+params.id);
+                this.userService.getUser(+params.id).subscribe(
+                    response =>  this.user = response['data']
+                );
             }
         );
     }
