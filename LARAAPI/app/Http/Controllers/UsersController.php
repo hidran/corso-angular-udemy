@@ -39,7 +39,25 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = [];
+        $message = '';
+        try {
+            $User = new User();
+
+            $postData = $request->except('id','_method');
+            
+            $postData['password'] = bcrypt('test');
+            
+           $User->fill($postData);
+            $success = $User->save();
+            
+            $data = $User;
+
+        } catch (\Exception $e) {
+            $success = true;
+            $message = $e->getMessage();
+        }
+        return  compact('data','message','success');
     }
 
     /**
@@ -58,7 +76,7 @@ class UsersController extends Controller
           
               
         } catch (\Exception $e) {
-            $success = true;
+            $success = false;
             $message = $e->getMessage();
         }
         return  compact('data','message','success');
@@ -84,7 +102,21 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = [];
+        $message = '';
+        try {
+            $User = User::findOrFail($id);
+         
+            $postData = $request->except('id','_method');
+            $postData['password'] = bcrypt('test');
+            $success = $User->update($postData);
+            $data = $User;
+
+        } catch (\Exception $e) {
+            $success = false;
+            $message = $e->getMessage();
+        }
+        return  compact('data','message','success');
     }
 
     /**
@@ -95,6 +127,17 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = [];
+        $message = 'User deleted';
+        try {
+            $User = User::findOrFail($id);
+            $data = $User;
+            $success = $User->delete();
+
+        } catch (\Exception $e) {
+            $success = false;
+            $message = 'User not Found';
+        }
+        return  compact('data','message','success');
     }
 }
