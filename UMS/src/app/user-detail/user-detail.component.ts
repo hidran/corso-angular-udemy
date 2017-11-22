@@ -15,13 +15,13 @@ export class UserDetailComponent implements OnInit {
     private __user: User;
  @Input() set user(user: User){
        this.__user = user;
-      
+
  }
  get user() {
      return this.__user;
  }
 
-    constructor(private userService: UserService, 
+    constructor(private userService: UserService,
                 private route: ActivatedRoute,
                 private router: Router
     ) {
@@ -29,25 +29,47 @@ export class UserDetailComponent implements OnInit {
 
     ngOnInit() {
       this.user = new User();
-      
+
         this.route.params.subscribe(
             (params) => {
                if (!params.id) {
                    return;
                }
-                this.userService.getUser(+params.id).subscribe(
-                    response =>  this.user = response['data']
-                );
+             this.userService.getUser(+params.id).subscribe(
+                 response => this.user = response['data']
+             );
             }
         );
     }
     saveUser() {
         if (this.user.id > 0) {
-            this.userService.updateUser(this.user);
+          this.updateUser(this.user);
         } else {
-            this.userService.createUser(this.user);
+           this.createUser(this.user);
         }
-        this.router.navigate(['users']);
+    }
+
+    createUser(user: User) {
+        this.userService.createUser(this.user).subscribe(response => {
+            if (response['success']) {
+                alert('User ' + user.name + ' Creato correttamente');
+            } else {
+                alert(response['message']);
+            }
+            this.router.navigate(['users']);
+        });
+    }
+
+    updateUser(user: User) {
+        this.userService.updateUser(this.user).subscribe(response => {
+                if (response['success']) {
+                    alert('User ' + user.name + ' Modificato correttamente');
+                } else {
+                    alert(response['message']);
+                }
+                this.router.navigate(['users']);
+            }
+        );
     }
     resetForm(form) {
 

@@ -21,7 +21,11 @@ export class UsersComponent implements OnInit {
     }
 
     onDeleteUser(user: User) {
-        this.service.deleteUser(user);
+        this.service.deleteUser(user).subscribe(
+            response => {
+                    alert(response['message']);
+            }
+        );
     }
     onSelectUser(user: User) {
         const userCopy = Object.assign({}, user);
