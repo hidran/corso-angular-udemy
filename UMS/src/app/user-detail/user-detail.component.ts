@@ -13,6 +13,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class UserDetailComponent implements OnInit {
     private userCopy: User;
     private __user: User;
+    @Input() firstName;
  @Input() set user(user: User){
        this.__user = user;
 
@@ -28,8 +29,8 @@ export class UserDetailComponent implements OnInit {
     }
 
     ngOnInit() {
+   console.log(this.firstName)
       this.user = new User();
-
         this.route.params.subscribe(
             (params) => {
                if (!params.id) {
