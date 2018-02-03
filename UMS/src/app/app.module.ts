@@ -13,30 +13,9 @@ import { ModalBasicComponent } from './modal-basic/modal-basic.component';
 import {RouterModule, Routes} from '@angular/router';
 import { UserDataComponent } from './user-data/user-data.component';
 import { HttpClientModule} from '@angular/common/http';
+import {RoutingModuleModule} from "./routing-module.module";
 
-const  routes: Routes = [
-    {
-        path: 'users',
-        component: UsersComponent
-    },
-    {
-        path: '',
-        redirectTo: 'users',
-        pathMatch: 'full'
-    },
-    {
-        path: 'users/new',
-        component: UserDetailComponent
-    },
-    {
-        path: 'users/:id/edit',
-        component: UserDetailComponent
-    },
-    {
-        path: 'users/:id',
-        component: UserDataComponent
-    }
-];
+
 
 @NgModule({
   declarations: [
@@ -52,8 +31,8 @@ const  routes: Routes = [
     BrowserModule, FormsModule,
       AngularFontAwesomeModule,
       NgbModule.forRoot(),
-      RouterModule.forRoot(routes),
       HttpClientModule,
+      RoutingModuleModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
