@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {User} from '../classes/User';
 import {UserService} from '../services/user.service';
-import {FormsModule} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 
 
@@ -13,8 +12,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class UserDetailComponent implements OnInit {
     private userCopy: User;
     private __user: User;
-    @Input() firstName;
- @Input() set user(user: User){
+ @Input() set user(user: User) {
        this.__user = user;
 
  }
@@ -29,16 +27,15 @@ export class UserDetailComponent implements OnInit {
     }
 
     ngOnInit() {
-   console.log(this.firstName)
       this.user = new User();
-        this.route.params.subscribe(
+        this.route.paramMap.subscribe(
             (params) => {
-               if (!params.id) {
-                   return;
-               }
-             this.userService.getUser(+params.id).subscribe(
-                 response => this.user = response['data']
-             );
+                if (!params.get('id')) {
+                    return;
+                }
+                this.userService.getUser(+params.get('id')).subscribe(
+                    response => this.user = response['data']
+                );
             }
         );
     }
@@ -72,7 +69,7 @@ export class UserDetailComponent implements OnInit {
             }
         );
     }
-    resetForm(form) {
+    resetForm() {
 
         if (this.user.id === 0) {
             this.user = new User();
@@ -81,6 +78,6 @@ export class UserDetailComponent implements OnInit {
         }
     }
     backToUsers() {
-        this.router.navigate(['users']);
+        this.router.navigate(['users']).then();
     }
 }
