@@ -14,6 +14,7 @@ import {RouterModule, Routes} from '@angular/router';
 import { UserDataComponent } from './user-data/user-data.component';
 import { HttpClientModule} from '@angular/common/http';
 import {RoutingModuleModule} from "./routing-module.module";
+import {RouteGuardService} from "./route-guard.service";
 
 
 
