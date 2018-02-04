@@ -15,6 +15,8 @@ import { UserDataComponent } from './user-data/user-data.component';
 import { HttpClientModule} from '@angular/common/http';
 import {RoutingModuleModule} from "./routing-module.module";
 import {RouteGuardService} from "./route-guard.service";
+import {AuthService} from "./services/auth.service";
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -26,7 +28,8 @@ import {RouteGuardService} from "./route-guard.service";
       UserDetailComponent,
       NavComponent,
       ModalBasicComponent,
-      UserDataComponent
+      UserDataComponent,
+      LoginComponent
   ],
   imports: [
     BrowserModule, FormsModule,
@@ -35,7 +38,7 @@ import {RouteGuardService} from "./route-guard.service";
       HttpClientModule,
       RoutingModuleModule
   ],
-  providers: [UserService],
+  providers: [UserService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
