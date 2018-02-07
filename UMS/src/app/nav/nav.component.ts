@@ -10,8 +10,28 @@ import {Router} from "@angular/router";
 export class NavComponent implements OnInit {
     
    @Output() onNewUser = new EventEmitter()
-    private isUserLOggedIn = false
-  constructor(private auth : AuthService, private router: Router) { }
+    private isUserLOggedIn = false;
+    private username:string;
+  constructor(private auth : AuthService, private router: Router) {
+      auth.usersignedin.subscribe(
+          (user: User) =>  {
+              this.username = user.name;
+              this.isUserLOggedIn = true;
+          }
+      );
+      auth.userlogout.subscribe(
+          () =>  {
+              this.username = '';
+              this.isUserLOggedIn = false;
+          }
+      )
+      auth.usersignedup.subscribe(
+          (user: User) =>  {
+              this.username = user.name;
+              this.isUserLOggedIn = true;
+          }
+      )
+  }
 
   ngOnInit() {
      this.isUserLOggedIn =  this.auth.isUserLoggedIn();
@@ -24,7 +44,7 @@ export class NavComponent implements OnInit {
        this.auth.logout();
        setTimeout(() => {
            this.router.navigate(['login']);
-       }, 800);
+       }, 300);
     
    }
     signIn(e) {
