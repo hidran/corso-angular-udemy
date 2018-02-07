@@ -20,7 +20,10 @@ export class LoginComponent implements OnInit {
       }
   let result =  this.auth.signIn(form.value.email, form.value.password);
       if(result){
-          this.router.navigate([''])
+          setTimeout(() => {
+              this.router.navigate(['']);
+          }, 800);
+        
       }
   }
 }
