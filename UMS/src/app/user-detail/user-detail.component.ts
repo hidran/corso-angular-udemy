@@ -69,7 +69,7 @@ export class UserDetailComponent implements OnInit {
             }
         );
     }
-    resetForm() {
+    resetForm(f) {
 
         if (this.user.id === 0) {
             this.user = new User();

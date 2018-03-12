@@ -1,7 +1,6 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
 import {User} from "../classes/User";
 import {HttpClient, HttpErrorResponse, HttpHeaderResponse} from "@angular/common/http";
-import Any = jasmine.Any;
  interface Jwt {
      access_token: string,
      token_type: string

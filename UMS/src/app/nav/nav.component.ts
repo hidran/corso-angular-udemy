@@ -9,10 +9,10 @@ import {User} from "../classes/User";
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-    
+
    @Output() onNewUser = new EventEmitter()
-    private isUserLOggedIn = false;
-    private username:string;
+    public isUserLOggedIn = false;
+    public username:string;
   constructor(private auth : AuthService, private router: Router) {
       auth.usersignedin.subscribe(
           (user: User) =>  {
@@ -50,10 +50,10 @@ export class NavComponent implements OnInit {
        setTimeout(() => {
            this.router.navigate(['login']);
        }, 300);
-    
+
    }
     signIn(e) {
-     
+
         e.preventDefault();
         this.router.navigate(['login']);
     }
