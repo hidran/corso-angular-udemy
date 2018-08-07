@@ -10,7 +10,7 @@ export class AppComponent {
     showForm = false;
   userSelected: User = new User();
 
-    updateUser(user: User) {
+    updateUser(user: User) {                                
         this.showForm = true;
       this.userSelected = user;
 
