@@ -7,7 +7,7 @@ export class RouteGuardService  implements CanActivate{
 
   constructor( private router : Router, private auth : AuthService) { }
   canActivate( route : ActivatedRouteSnapshot, state : RouterStateSnapshot) {
-      if(this.auth.isUserLoggedIn()){
+      if(this.auth.isUserLoggedIn()) {
           return true;
       } else {
           this.router.navigate(['login']);

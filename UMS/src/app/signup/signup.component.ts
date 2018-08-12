@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {AuthService} from "../services/auth.service";
 import {Router} from "@angular/router";
+import {User} from '../classes/User';
 
 @Component({
   selector: 'app-signup',
@@ -10,18 +11,16 @@ import {Router} from "@angular/router";
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService, private router: Router) {
+    auth.usersignedup.subscribe( () => {
+        router.navigate(['/']);
+    }
+    );
+  }
 
   ngOnInit() {
   }
-  signUp(form :NgForm) {
-    let result = this.auth.signUp(form.value.name,form.value.email, form.value.password);
-    if(!result){
-        return ;
-    }
-    setTimeout(() => {
-          this.router.navigate(['']); 
-      }, 300);
-   
+  signUp(form: NgForm) {
+    this.auth.signUp(form.value.name, form.value.email, form.value.password);
   }
 }
