@@ -1,32 +1,33 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
-import {User} from "../classes/User";
-import {HttpClient, HttpErrorResponse, HttpHeaderResponse} from "@angular/common/http";
+import {User} from '../classes/User';
+import { environment } from '../../environments/environment';
+import {HttpClient, HttpErrorResponse, HttpHeaderResponse} from '@angular/common/http';
  interface Jwt {
-     access_token: string,
-     token_type: string
-     expires_in : number,
-     user_name: string,
-     email: string
+     access_token: string;
+     token_type: string;
+     expires_in: number;
+     user_name: string;
+     email: string;
  }
 @Injectable()
 export class AuthService {
     private isUserLogged = false;
-    @Output() usersignedin = new EventEmitter<User>()
-    @Output() usersignedup = new EventEmitter<User>()
-    @Output() userlogout = new EventEmitter()
-    private APIAUTHURL = 'http://localhost:8000/api/auth/';
+    @Output() usersignedin = new EventEmitter<User>();
+    @Output() usersignedup = new EventEmitter<User>();
+    @Output() userlogout = new EventEmitter();
+    private APIAUTHURL = environment.APIURL;
     constructor(private http: HttpClient) {
     }
 
     isUserLoggedIn() {
-       
+
         this.isUserLogged = !!localStorage.getItem('token');
       //  alert(localStorage.getItem('token'))
         return this.isUserLogged;
     }
 
     signIn(email: string, password: string) {
-        
+
         this.http.post(this.APIAUTHURL + 'login',
             {
                 email: email,
@@ -37,19 +38,19 @@ export class AuthService {
                 localStorage.setItem('token', payload.access_token);
                 console.log(payload)
                 localStorage.setItem('user' , JSON.stringify(payload));
-                let user = new User();
+                const user = new User();
                 user.name = payload.user_name;
                 user.email = payload.email;
                 this.usersignedin.emit(user);
                 return true;
-                   
+
         } ,
             (httpResp: HttpErrorResponse) => {
-              
-               alert(httpResp.message)
+
+               alert(httpResp.message);
             }
         );
-       
+
 
     }
 
@@ -91,12 +92,12 @@ export class AuthService {
     }
     getUser(): User {
         const data = JSON.parse(localStorage.getItem('user'));
-        let user = new User();
-        if(data){
+        const user = new User();
+        if (data) {
             user.name = data['user_name'];
             user.email = data['email'];
         }
-       return user; 
+       return user;
     }
     getToken() {
         return localStorage.getItem('token');
