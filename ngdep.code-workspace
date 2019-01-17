@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "UMS"
+		},
+		{
+			"path": "LARAAPI"
+		}
+	],
+	"settings": {
+		"git.ignoreLimitWarning": true
+	}
+}

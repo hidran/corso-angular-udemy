@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-   APIURL : 'http://localhost:8000/users/'
+   APIURL : 'http://domain25cf9d.stackstaging.com/userapi/users',
+   APIAUTH : 'http://domain25cf9d.stackstaging.com/userapi/api/auth'
 };

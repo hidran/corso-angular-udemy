@@ -15,7 +15,7 @@ export class AuthService {
     @Output() usersignedin = new EventEmitter<User>();
     @Output() usersignedup = new EventEmitter<User>();
     @Output() userlogout = new EventEmitter();
-    private APIAUTHURL = environment.APIURL;
+    private APIAUTHURL = environment.APIAUTH;
     constructor(private http: HttpClient) {
     }
 
@@ -28,7 +28,7 @@ export class AuthService {
 
     signIn(email: string, password: string) {
 
-        this.http.post(this.APIAUTHURL + 'login',
+        this.http.post(this.APIAUTHURL + '/login',
             {
                 email: email,
                 password: password
@@ -36,7 +36,7 @@ export class AuthService {
             ).subscribe(
             (payload: Jwt) => {
                 localStorage.setItem('token', payload.access_token);
-                console.log(payload)
+                console.log(payload);
                 localStorage.setItem('user' , JSON.stringify(payload));
                 const user = new User();
                 user.name = payload.user_name;
@@ -61,7 +61,7 @@ export class AuthService {
         user.name = username;
         user.email = email;
 
-        this.http.post(this.APIAUTHURL + 'signup',
+        this.http.post(this.APIAUTHURL + '/signup',
             {
                 email: email,
                 password: password,
